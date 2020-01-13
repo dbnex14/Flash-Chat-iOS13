@@ -7,14 +7,20 @@
 //
 
 import UIKit
+//import CLTypingLabel
 
 class WelcomeViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
+    //@IBOutlet weak var titleLabel: CLTypingLabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // how to animate using CLTypingLabel cocoapod
+        //titleLabel.text = "⚡️FlashChat"
 
+        // how to manually do automation
         titleLabel.text = ""
         var charIndex = 0.0 //needed since below multiple timers are created
         let titleText = "⚡️FlashChat"
