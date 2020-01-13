@@ -25,9 +25,6 @@ class WelcomeViewController: UIViewController {
         var charIndex = 0.0 //needed since below multiple timers are created
         let titleText = "⚡️FlashChat"
         for letter in titleText {
-            print("-")
-            print(0.1 * charIndex)
-            print(letter)
             // this loop creates multiple timers and starts them almost at
             // the same time; hence we add charIndex so each starts 0.1
             // appart
