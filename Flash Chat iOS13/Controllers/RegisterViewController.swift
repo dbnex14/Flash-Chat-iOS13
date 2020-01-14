@@ -23,7 +23,7 @@ class RegisterViewController: UIViewController {
                 } else {
                     // we have successfully registered user to firebase
                     // navigate to chat view controller
-                    self.performSegue(withIdentifier: "RegisterToChat", sender: self)
+                    self.performSegue(withIdentifier: K.registerSegue, sender: self)
                 }
             }
         }

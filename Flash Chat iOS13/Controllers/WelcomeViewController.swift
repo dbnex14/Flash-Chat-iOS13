@@ -23,7 +23,7 @@ class WelcomeViewController: UIViewController {
         // how to manually do automation
         titleLabel.text = ""
         var charIndex = 0.0 //needed since below multiple timers are created
-        let titleText = "⚡️FlashChat"
+        let titleText = K.appName
         for letter in titleText {
             // this loop creates multiple timers and starts them almost at
             // the same time; hence we add charIndex so each starts 0.1
