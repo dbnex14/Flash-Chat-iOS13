@@ -69,6 +69,11 @@ class ChatViewController: UIViewController {
                                //by the time this closure fetches data from internet,
                                 //the viewDidLoad may finish so it will not display anything.  So we reload data on tableView
                                 self.tableView.reloadData()
+                               
+                                let indexPath = IndexPath(row: self.messages.count - 1, section: 0) // we have just one section
+                                // now scroll list of messages to top so we see last message
+                                // that shows at the bottom
+                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
                             }
                         }
                         
@@ -88,6 +93,9 @@ class ChatViewController: UIViewController {
                     print("There was an issue saving data to firestor, \(e)")
                 } else {
                     print("Successfully saved data.")
+                    DispatchQueue.main.async {
+                        self.messageTextfield.text = ""
+                    }
                 }
             }
         }
@@ -118,8 +126,26 @@ extension ChatViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // which cell to display in each row of our table view
         // so we have to create cell and return it to table view
+        let message = messages[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
-        cell.label.text = messages[indexPath.row].body // this is main part of info in cell
+        cell.label.text = message.body // this is main part of info in cell
+        
+        // style message cell based if message is from
+        // current user or someone else
+        if message.sender == Auth.auth().currentUser?.email {
+            // messages currently logged user sends so
+            // we need to show right avatar and correct collor
+            cell.leftImageView.isHidden = true
+            cell.rightImageView.isHidden = false
+            cell.messageBubble.backgroundColor = UIColor(named: K.BrandColors.lightPurple)
+            cell.label.textColor = UIColor(named: K.BrandColors.purple)
+        } else {
+            cell.leftImageView.isHidden = false
+            cell.rightImageView.isHidden = true
+            cell.messageBubble.backgroundColor = UIColor(named: K.BrandColors.purple)
+            cell.label.textColor = UIColor(named: K.BrandColors.lightPurple)
+        }
+
         return cell
     }
 }
