@@ -14,6 +14,19 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     //@IBOutlet weak var titleLabel: CLTypingLabel!
     
+    // use viewWillAppear and viewWillDisappear to hide navigation on
+    // WelcomeViewController but to show it on others (hence unhide in
+    // viewWillDissapear method
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
